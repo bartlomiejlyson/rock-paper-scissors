@@ -1,20 +1,17 @@
 // Rock - Paper - Scissor Game Simulation
 
+let playerScore;
+let computerScore;
+let numberOfGames;
 
-
-
-let playerScore = 0;
-let computerScore = 0;
-let numberOfGames = 0;
-
+//function: reseting the score
 let resetGameScore = function() {
 playerScore = 0;
 computerScore = 0;
 numberOfGames = 0;
 };
 
-
-//function of random choose of computer
+//function: random choose of computer
 let computerPlay = function(n) { 
     n = Math.floor( Math.random() * 3 + 1 );
     if (n==1) {
@@ -27,42 +24,41 @@ let computerPlay = function(n) {
     return n;
 };
 
-
+//function: single round with returned result
 let singleRound = function (playerSelection, computerSelection) {
-    if (playerSelection == "rock" && computerSelection == "paper") {
+    if (playerSelection == computerSelection) {
         computerScore++;
-        return "You lost! Paper beats the Rock!";
-    } else if (playerSelection == "rock" && computerSelection == "scissors") {
         playerScore++;
-        return "You win! Rock beats the Scissors!";
-    } else if (playerSelection == "paper" && computerSelection == "rock") {
-        playerScore++;
-        return "You win! Paper beats the Rock!";
-    } else if (playerSelection == "paper" && computerSelection == "scissors") {
+        return 'There is a Tie';
+
+    } else if ( (playerSelection == "rock" && computerSelection == "paper") || (playerSelection == "paper" && computerSelection == "scissors") || (playerSelection == "scissors" && computerSelection == "rock"))  {
         computerScore++;
-        return "You lost! Scissors beats the Paper!";
-    } else if (playerSelection == "scissors" && computerSelection == "rock") {
-        computerScore++;
-        return "You lost! Rock beats the Scissors!";
-    } else if (playerSelection == "scissors" && computerSelection == "paper") {
+        return `You lost! ${computerSelection} beats ${playerSelection}!`;
+
+    } else if ( (playerSelection == "rock" && computerSelection == "scissors") || (playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "scissors" && computerSelection == "paper") ) {
         playerScore++;
-        return "You win! Scissors beats the Paper!";
-    } else if (playerSelection == computerSelection) {
-        return "It's tie";
+        return `You win! ${playerSelection} beats ${computerSelection}!`;
     }
 };
+    
+resetGameScore();
 
- 
-for (i=5; i > numberOfGames; numberOfGames++) {
+while (numberOfGames <= 4) {
+    
+    playerSelection = prompt("Your choice: Rock? Paper? Scissors?").toLowerCase();
+    let computerSelection = computerPlay();
 
-playerSelection = prompt("Your choose: Rock? Paper? Scissors?").toLowerCase();
-let computerSelection = computerPlay();
+    console.log('Game: ', `${numberOfGames+1}/5`);
+    console.log('Your choose: ', playerSelection);
+    console.log('Computer choose: ', computerSelection);
+    console.log('Verdict: ', singleRound(playerSelection, computerSelection));
+    console.log('Your score: ', playerScore);
+    console.log('Computer score: ',computerScore);
+    console.log('====================');
 
-console.log('Game: ', `${numberOfGames+1}/5`);
-console.log('Your choose: ', playerSelection);
-console.log('Computer choose: ', computerSelection);
-console.log('Verdict: ', singleRound(playerSelection, computerSelection));
-console.log('Your score: ', playerScore);
-console.log('Computer score: ',computerScore);
-console.log('________________________');
+    numberOfGames++;
+    if (numberOfGames > 4 ) {
+        resetGameScore();
+        console.log('========= NEXT GAME =========');
+    }
 }
