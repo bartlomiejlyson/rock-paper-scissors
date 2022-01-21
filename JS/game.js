@@ -1,15 +1,17 @@
 // Rock - Paper - Scissor Game Simulation
 
-let playerScore;
-let computerScore;
-let numberOfGames;
+let playerScore = 0;
+let computerScore = 0;
+let numberOfGames = 0;
 
-//function: reseting the score
+
+//function: reseting used variables that count score and number of games.
 let resetGameScore = function() {
 playerScore = 0;
 computerScore = 0;
 numberOfGames = 0;
 };
+
 
 //function: random choose of computer
 let computerPlay = function(n) { 
@@ -24,7 +26,8 @@ let computerPlay = function(n) {
     return n;
 };
 
-//function: single round with returned result
+
+//function: single round of game with returned verdict
 let singleRound = function (playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
         computerScore++;
@@ -41,13 +44,23 @@ let singleRound = function (playerSelection, computerSelection) {
     }
 };
     
-resetGameScore();
 
+//counting of games (counting of single rounds), game lasts 5 rounds
 while (numberOfGames <= 4) {
     
-    playerSelection = prompt("Your choice: Rock? Paper? Scissors?").toLowerCase();
+    //Validating if answer for prompted question is correct.
+    let playerSelection, valid=false;
+    while(!valid) {
+	    playerSelection = prompt("Your choice: Rock? Paper? Scissors?").toLowerCase();
+	    valid = (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors");
+        if (valid == false) {
+            alert("You made a typo probably, please choose: Rock or Paper or Scissors");
+        } else {}
+    }
+
     let computerSelection = computerPlay();
 
+    //generating console information of game progress
     console.log('Game: ', `${numberOfGames+1}/5`);
     console.log('Your choose: ', playerSelection);
     console.log('Computer choose: ', computerSelection);
@@ -57,7 +70,18 @@ while (numberOfGames <= 4) {
     console.log('====================');
 
     numberOfGames++;
+
+    //final result of game after 5 rounds and game starts again
     if (numberOfGames > 4 ) {
+        if (playerScore == computerScore) {
+            console.log('Final Verdict: Tie!');
+        } else if (playerScore > computerScore) {
+            console.log('Final Verdict: You won!');
+        } else {
+            console.log('Final Verdict: You loose!');
+        }
+        
+        console.log();
         resetGameScore();
         console.log('========= NEXT GAME =========');
     }
