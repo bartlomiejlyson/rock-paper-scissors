@@ -17,11 +17,11 @@ numberOfGames = 0;
 let computerPlay = function(n) { 
     n = Math.floor( Math.random() * 3 + 1 );
     if (n==1) {
-        n = "rock";
+        n = 'rock';
     } else if (n==2) {
-        n = "paper";
+        n = 'paper';
     } else {
-        n = "scissors";
+        n = 'scissors';
     }
     return n;
 };
@@ -34,11 +34,11 @@ let singleRound = function (playerSelection, computerSelection) {
         playerScore++;
         return 'There is a Tie';
 
-    } else if ( (playerSelection == "rock" && computerSelection == "paper") || (playerSelection == "paper" && computerSelection == "scissors") || (playerSelection == "scissors" && computerSelection == "rock"))  {
+    } else if ( (playerSelection == 'rock' && computerSelection == 'paper') || (playerSelection == 'paper' && computerSelection == 'scissors') || (playerSelection == 'scissors' && computerSelection == 'rock'))  {
         computerScore++;
         return `You lost! ${computerSelection} beats ${playerSelection}!`;
 
-    } else if ( (playerSelection == "rock" && computerSelection == "scissors") || (playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "scissors" && computerSelection == "paper") ) {
+    } else if ( (playerSelection == 'rock' && computerSelection == 'scissors') || (playerSelection == 'paper' && computerSelection == 'rock') || (playerSelection == 'scissors' && computerSelection == 'paper') ) {
         playerScore++;
         return `You win! ${playerSelection} beats ${computerSelection}!`;
     }
@@ -51,10 +51,10 @@ while (numberOfGames <= 4) {
     //Validating if answer for prompted question is correct.
     let playerSelection, valid=false;
     while(!valid) {
-	    playerSelection = prompt("Your choice: Rock? Paper? Scissors?").toLowerCase();
-	    valid = (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors");
+	    playerSelection = prompt('Your choice: Rock? Paper? Scissors?').toLowerCase();
+	    valid = (playerSelection == 'rock' || playerSelection == 'paper' || playerSelection == 'scissors');
         if (valid == false) {
-            alert("You made a typo probably, please choose: Rock or Paper or Scissors");
+            alert('You might have made a typo, please choose: Rock or Paper or Scissors');
         } else {}
     }
 
@@ -62,7 +62,7 @@ while (numberOfGames <= 4) {
 
     //generating console information of game progress
     console.log('Game: ', `${numberOfGames+1}/5`);
-    console.log('Your choose: ', playerSelection);
+    console.log('You choose: ', playerSelection);
     console.log('Computer choose: ', computerSelection);
     console.log('Verdict: ', singleRound(playerSelection, computerSelection));
     console.log('Your score: ', playerScore);
