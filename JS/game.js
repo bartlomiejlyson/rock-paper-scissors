@@ -81,7 +81,6 @@ while (numberOfGames <= 4) {
             console.log('Final Verdict: You loose!');
         }
         
-        console.log();
         resetGameScore();
         console.log('========= NEXT GAME =========');
     }
